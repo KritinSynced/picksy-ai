@@ -1,0 +1,122 @@
+.recommendation-section {
+  margin: 3.5rem 0;
+  position: relative;
+}
+
+.recommendation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.title-left {
+  position: relative;
+}
+
+.recommendation-title {
+  font-family: var(--font-title);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.title-decorator {
+  display: block;
+  width: 40px;
+  height: 4px;
+  background: var(--primary-gradient);
+  border-radius: var(--radius-full);
+  margin-top: 6px;
+}
+
+.carousel-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.control-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.control-btn:hover {
+  background: var(--primary);
+  color: white;
+  border-color: transparent;
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(99, 102, 241, 0.2);
+}
+
+.control-btn:active {
+  transform: scale(0.95);
+}
+
+/* Scroll Container */
+.recommendation-scroll-outer {
+  position: relative;
+  margin: 0 -24px;
+  padding: 0 24px;
+  overflow: hidden;
+}
+
+.recommendation-scroll-container {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 10px 0 20px 0;
+  scrollbar-width: none; /* Hide standard Firefox scrollbar */
+}
+
+.recommendation-scroll-container::-webkit-scrollbar {
+  display: none; /* Hide Chrome/Safari scrollbar */
+}
+
+.recommendation-card-wrapper {
+  flex: 0 0 280px;
+  scroll-snap-align: start;
+}
+
+/* Skeletons */
+.skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 10px;
+}
+
+.skeleton-card {
+  height: 380px;
+  border-radius: var(--radius-md);
+  background: #f1f5f9;
+}
+
+@media (max-width: 1024px) {
+  .recommendation-card-wrapper {
+    flex: 0 0 250px;
+  }
+}
+
+@media (max-width: 640px) {
+  .recommendation-card-wrapper {
+    flex: 0 0 220px;
+  }
+  .recommendation-scroll-container {
+    gap: 16px;
+  }
+  .recommendation-title {
+    font-size: 1.3rem;
+  }
+}

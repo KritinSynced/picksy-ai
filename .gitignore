@@ -1,0 +1,28 @@
+# Dependencies
+**/node_modules/
+
+# Local environment variables
+backend/.env
+
+# Local build folders
+frontend/build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+*.log
+
+# Editor & System generated folders
+.gemini/
+brain/
+.system_generated/
+.tempmediaStorage/
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

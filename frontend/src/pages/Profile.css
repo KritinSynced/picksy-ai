@@ -1,0 +1,449 @@
+.profile-page-premium {
+  padding: 3rem 0 5rem 0;
+  min-height: 80vh;
+}
+
+.flex-center-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
+/* ==========================================
+   Guest Authentication Card
+   ========================================== */
+.auth-form-card {
+  width: 100%;
+  max-width: 440px;
+  padding: 35px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.auth-tabs {
+  display: flex;
+  border-bottom: 2px solid var(--border-color);
+  margin-bottom: 0.5rem;
+}
+
+.auth-tab-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 12px;
+  font-family: var(--font-title);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  position: relative;
+  transition: var(--transition);
+}
+
+.auth-tab-btn.active {
+  color: var(--primary);
+}
+
+.auth-tab-btn.active::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--primary);
+  border-radius: var(--radius-full);
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Input boxes with icons */
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 14px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.input-with-icon input {
+  width: 100%;
+  padding: 0.65rem 1rem 0.65rem 2.8rem;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-primary);
+  font-size: 0.95rem;
+  background-color: #f8fafc;
+  transition: var(--transition);
+}
+
+.input-with-icon input:focus {
+  outline: none;
+  border-color: var(--primary);
+  background-color: white;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+.auth-submit-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.auth-footer {
+  text-align: center;
+  border-top: 1px solid var(--border-color);
+  padding-top: 1.25rem;
+}
+
+/* ==========================================
+   Active Dashboard Layout
+   ========================================== */
+.profile-header-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+  border-radius: var(--radius-lg);
+  margin-bottom: 40px;
+}
+
+.profile-header-identity {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.profile-circle-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--primary-gradient);
+  color: white;
+  font-family: var(--font-title);
+  font-size: 1.7rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.profile-details-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.profile-details-text h1 {
+  font-family: var(--font-title);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.profile-email-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.member-since-badge {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.logout-action-btn {
+  padding: 10px 20px;
+}
+
+/* Dashboard column split */
+.profile-dashboard-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* Left sidebar menu tabs */
+.dashboard-tabs-sidebar {
+  padding: 16px;
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dashboard-tab-btn {
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 12px 16px;
+  font-family: var(--font-title);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: var(--transition);
+  text-align: left;
+}
+
+.dashboard-tab-btn:hover {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.dashboard-tab-btn.active {
+  background: var(--primary-gradient);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+}
+
+/* Right Content panel */
+.dashboard-content-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.view-title {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 1rem;
+}
+
+.view-title h2 {
+  font-family: var(--font-title);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.view-title p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* Preferences form design */
+.preferences-form-card {
+  padding: 35px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.preferences-form-card h2 {
+  font-family: var(--font-title);
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.pref-description {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.preferences-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.pref-fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.pref-fieldset h3 {
+  font-family: var(--font-title);
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  border-left: 3px solid var(--primary);
+  padding-left: 8px;
+}
+
+.pref-checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 12px;
+}
+
+.pref-checkbox-grid.brands-grid {
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+}
+
+.save-preferences-btn {
+  width: fit-content;
+  min-width: 160px;
+}
+
+/* Empty states */
+.empty-history-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 40px;
+  text-align: center;
+  gap: 16px;
+  color: var(--text-muted);
+}
+
+.empty-icon {
+  opacity: 0.5;
+}
+
+/* Purchase order list cards */
+.purchase-orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.purchase-history-card {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  gap: 20px;
+  border-radius: var(--radius-md);
+  background: white;
+}
+
+.purchase-img-wrapper {
+  width: 70px;
+  height: 70px;
+  flex: 0 0 70px;
+  border-radius: var(--radius-sm);
+  background: #f8fafc;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.purchase-img-wrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.purchase-details-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.purchase-details-card h3 {
+  font-family: var(--font-primary);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.purchase-card-brand {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.purchase-card-date {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.purchase-card-totals {
+  text-align: right;
+  min-width: 100px;
+}
+
+.purchase-qty-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.purchase-total-price {
+  font-family: var(--font-title);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-top: 4px;
+}
+
+/* Responsive queries */
+@media (max-width: 1024px) {
+  .profile-dashboard-grid {
+    grid-template-columns: 220px 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-header-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+  }
+  .logout-action-btn {
+    width: 100%;
+  }
+  .profile-dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .dashboard-tabs-sidebar {
+    flex-direction: row;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 8px;
+    gap: 8px;
+  }
+  .dashboard-tab-btn {
+    width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-form-card {
+    padding: 20px;
+  }
+  .purchase-history-card {
+    flex-wrap: wrap;
+    padding: 16px;
+    gap: 16px;
+  }
+  .purchase-card-totals {
+    text-align: left;
+    width: 100%;
+    margin-top: 4px;
+  }
+  .purchase-total-price {
+    display: inline-block;
+    margin-left: 8px;
+    margin-top: 0;
+  }
+}
