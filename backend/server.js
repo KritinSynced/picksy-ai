@@ -24,6 +24,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/picksy', 
 app.use('/api/products', require('./routes/products'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/recommendations', require('./routes/recommendations'));
+app.use('/api/dashboard', require('./routes/dashboard'));
 
 // Health check route
 app.get('/api/health', (req, res) => {

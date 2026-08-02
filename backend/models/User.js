@@ -18,12 +18,36 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: [true, 'Password is required'],
     minlength: [6, 'Password must be at least 6 characters']
   },
   fullName: {
     type: String,
     trim: true
+  },
+  clerkId: {
+    type: String,
+    unique: true,
+    sparse: true
+  },
+  age: {
+    type: Number
+  },
+  gender: {
+    type: String
+  },
+  interests: [String],
+  shoppingFrequency: {
+    type: String
+  },
+  budgetTier: {
+    type: String
+  },
+  location: {
+    type: String
+  },
+  embeddings: {
+    type: [Number],
+    default: []
   },
   preferences: {
     favoriteCategories: [String],

@@ -1,0 +1,176 @@
+/* ==========================================
+   Catalog Page Layout & Structure
+   ========================================== */
+.search-catalog-page {
+  margin-bottom: 80px;
+}
+
+.catalog-header-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.catalog-header-banner h2 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.catalog-header-banner h2 span {
+  color: var(--primary);
+}
+
+.results-count {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Catalog Sidebar Filter panels */
+.category-links-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cat-link-btn {
+  background: transparent;
+  border: none;
+  text-align: left;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.cat-link-btn:hover {
+  background: var(--border-color);
+  color: var(--text-primary);
+  transform: translateX(4px);
+}
+
+.cat-link-btn.active {
+  background: var(--primary-light);
+  color: var(--primary);
+  font-weight: 700;
+}
+
+/* Rating filter rows */
+.rating-filter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rating-filter-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: var(--transition);
+  width: 100%;
+}
+
+.rating-filter-row:hover {
+  background: var(--border-color);
+}
+
+.rating-filter-row.active {
+  background: var(--primary-light);
+  border-color: var(--primary);
+}
+
+/* Suggestion typo box */
+.typo-suggestion-box {
+  padding: 16px 24px;
+  margin-bottom: 2rem;
+  border-left: 4px solid var(--accent);
+}
+
+.typo-suggestion-box p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.suggestion-link {
+  background: transparent;
+  border: none;
+  color: var(--accent);
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+  font-size: 0.95rem;
+}
+
+/* Pagination container */
+.pagination-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  margin-top: 40px;
+}
+
+.pagination-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background: var(--primary-gradient);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+}
+
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.page-count-text {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* Brand scroll bar styling */
+.brand-checklist::-webkit-scrollbar {
+  width: 4px;
+}
+
+.brand-checklist::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.brand-checklist::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: var(--radius-full);
+}

@@ -57,6 +57,43 @@ const productSchema = new mongoose.Schema({
     min: 0
   },
   features: [String],
+  specifications: {
+    type: mongoose.Schema.Types.Mixed,
+    default: {}
+  },
+  discount: {
+    type: Number,
+    default: 0,
+    min: 0,
+    max: 100
+  },
+  seller: {
+    type: String,
+    default: 'Picksy Retail'
+  },
+  thumbnail: {
+    type: String
+  },
+  similarProducts: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Product'
+  }],
+  frequentlyBoughtTogether: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Product'
+  }],
+  popularityScore: {
+    type: Number,
+    default: 0
+  },
+  trendingScore: {
+    type: Number,
+    default: 0
+  },
+  embeddings: {
+    type: [Number],
+    default: []
+  },
   createdAt: {
     type: Date,
     default: Date.now

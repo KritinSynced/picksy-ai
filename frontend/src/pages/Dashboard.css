@@ -1,0 +1,266 @@
+/* ==========================================
+   Dashboard Page Header & Controls
+   ========================================== */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1.5rem;
+}
+
+.dashboard-timeframe {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--primary-light);
+  color: var(--primary);
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: 0.88rem;
+}
+
+body.dark-theme .dashboard-timeframe {
+  color: #a5b4fc;
+}
+
+.dashboard-loading-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.skeleton-dashboard-header {
+  width: 300px;
+  height: 40px;
+}
+
+/* Timeline Labels for Curved SVG Chart */
+.chart-timeline-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 12px;
+  font-weight: 600;
+}
+
+/* Category Sales Breakdown List */
+.dashboard-category-sales-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cat-sales-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cat-sales-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.cat-sales-title {
+  color: var(--text-primary);
+  text-transform: capitalize;
+}
+
+.cat-sales-amt {
+  color: var(--text-muted);
+}
+
+.cat-sales-bar-bg {
+  width: 100%;
+  height: 8px;
+  background: var(--border-color);
+  border-radius: var(--radius-full);
+}
+
+.cat-sales-bar-fill {
+  height: 100%;
+  background: var(--primary-gradient);
+  border-radius: var(--radius-full);
+}
+
+/* Demographics Section Wrap */
+.demographics-wrapper-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.demographics-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.demographics-sub-title {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+/* Age Distribution Vertical Bars */
+.age-stats-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 180px;
+  padding-bottom: 10px;
+}
+
+.age-row-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+}
+
+.age-bar-track {
+  width: 16px;
+  height: 120px;
+  background: var(--border-color);
+  border-radius: var(--radius-full);
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+}
+
+.age-bar-fill {
+  width: 100%;
+  background: var(--accent-gradient);
+  border-radius: var(--radius-full);
+  transition: height 1.2s ease-out;
+}
+
+.age-range-lbl {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.age-count-lbl {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+/* Geographical Location List */
+.location-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.location-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+}
+
+.loc-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.loc-icon {
+  color: var(--danger);
+}
+
+.loc-val {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+/* Dashboard Analytics Table */
+.dashboard-table-container {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  margin-top: 16px;
+}
+
+.dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.88rem;
+}
+
+.dashboard-table th {
+  background: var(--border-color);
+  color: var(--text-secondary);
+  font-family: var(--font-title);
+  font-weight: 700;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.dashboard-table td {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.dashboard-table tbody tr:hover {
+  background: var(--border-color);
+}
+
+.table-product-name-col {
+  max-width: 320px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.table-category-tag {
+  font-size: 0.72rem;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: var(--primary-light);
+  color: var(--primary);
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.rating-cell {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+}
+
+.rating-star-icon {
+  color: #fbbf24;
+}
+
+.table-popularity-col {
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .demographics-wrapper-row {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}

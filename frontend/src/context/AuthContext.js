@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
+import { useUser, useAuth as useClerkAuth } from '@clerk/clerk-react';
 
 const AuthContext = createContext();
 
@@ -18,31 +19,93 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Load user session on mount
+  // Safely capture Clerk hooks (will throw if ClerkProvider is absent)
+  let clerkUser = null;
+  let clerkIsLoaded = false;
+  let clerkSignOut = null;
+
+  try {
+    const { user: cUser, isLoaded } = useUser();
+    const { signOut } = useClerkAuth();
+    clerkUser = cUser;
+    clerkIsLoaded = isLoaded;
+    clerkSignOut = signOut;
+  } catch (e) {
+    // ClerkProvider not mounted
+  }
+
+  // Handle Auth Session loading
   useEffect(() => {
-    const checkLoggedIn = async () => {
-      const savedUser = localStorage.getItem('user');
-      if (savedUser) {
+    const syncUser = async () => {
+      if (clerkIsLoaded && clerkUser) {
+        // Clerk is active and user is signed in
         try {
-          const parsedUser = JSON.parse(savedUser);
-          // Fetch fresh user data from server to keep histories in sync
-          const response = await axios.get(`${API_URL}/users/${parsedUser._id}`);
-          setUser(response.data);
-          localStorage.setItem('user', JSON.stringify(response.data));
+          const email = clerkUser.primaryEmailAddress?.emailAddress;
+          const fullName = clerkUser.fullName;
+          const clerkId = clerkUser.id;
+
+          if (email && clerkId) {
+            const response = await axios.post(`${API_URL}/users/sync-clerk`, {
+              clerkId,
+              email,
+              fullName
+            });
+            setUser(response.data.user);
+            localStorage.setItem('user', JSON.stringify(response.data.user));
+          }
         } catch (err) {
-          console.error('Session restoration failed:', err);
-          // If server check fails (network down/removed user), fall back to stored user session
+          console.error('Clerk sync failure:', err);
+        } finally {
+          setLoading(false);
+        }
+      } else {
+        // Clerk is active but no active session, check for local Sandbox persona
+        const savedUser = localStorage.getItem('user');
+        if (savedUser) {
           try {
-            setUser(JSON.parse(savedUser));
+            const parsed = JSON.parse(savedUser);
+            // Only restore if it is a simulated sandbox user (simulated users don't have clerkId)
+            if (!parsed.clerkId || !clerkIsLoaded) {
+              // Fetch latest profile state from database
+              const response = await axios.get(`${API_URL}/users/${parsed._id}`);
+              setUser(response.data);
+              localStorage.setItem('user', JSON.stringify(response.data));
+            } else {
+              localStorage.removeItem('user');
+              setUser(null);
+            }
           } catch (_) {
             localStorage.removeItem('user');
+            setUser(null);
           }
+        } else {
+          setUser(null);
         }
+        setLoading(false);
       }
-      setLoading(false);
     };
-    checkLoggedIn();
-  }, []);
+
+    syncUser();
+  }, [clerkUser, clerkIsLoaded]);
+
+  // Persona Switching mechanism (for Recruiter Sandbox demo)
+  const loginAsSimulatedUser = async (simulatedUserId) => {
+    try {
+      setLoading(true);
+      setError(null);
+      const response = await axios.get(`${API_URL}/users/${simulatedUserId}`);
+      const userData = response.data;
+      setUser(userData);
+      localStorage.setItem('user', JSON.stringify(userData));
+      setLoading(false);
+      return { success: true };
+    } catch (err) {
+      const errMsg = err.response?.data?.message || 'Sandbox login failed.';
+      setError(errMsg);
+      setLoading(false);
+      return { success: false, message: errMsg };
+    }
+  };
 
   const login = async (email, password) => {
     try {
@@ -50,7 +113,6 @@ export const AuthProvider = ({ children }) => {
       const response = await axios.post(`${API_URL}/users/login`, { email, password });
       const userData = response.data.user;
       
-      // Fetch fully populated user details (history, recommendations, cart)
       const detailsResponse = await axios.get(`${API_URL}/users/${userData._id}`);
       const fullUser = detailsResponse.data;
       
@@ -75,7 +137,6 @@ export const AuthProvider = ({ children }) => {
       });
       const userData = response.data.user;
       
-      // Immediately log in the new user
       const detailsResponse = await axios.get(`${API_URL}/users/${userData._id}`);
       const fullUser = detailsResponse.data;
       
@@ -89,19 +150,25 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logout = () => {
+  const logout = async () => {
+    if (clerkSignOut) {
+      try {
+        await clerkSignOut();
+      } catch (err) {
+        console.error('Clerk signout error:', err);
+      }
+    }
     setUser(null);
     localStorage.removeItem('user');
   };
 
   const updatePreferences = async (preferences) => {
-    if (!user || user._id === 'guest') return { success: false, message: 'Must be logged in.' };
+    if (!user) return { success: false, message: 'Must be logged in.' };
     
     try {
       setError(null);
       const response = await axios.put(`${API_URL}/users/${user._id}/preferences`, preferences);
       
-      // Refetch user profile to sync updated preferences
       const detailsResponse = await axios.get(`${API_URL}/users/${user._id}`);
       const updatedUser = detailsResponse.data;
       
@@ -116,7 +183,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const refreshUser = async () => {
-    if (!user || user._id === 'guest') return;
+    if (!user) return;
     try {
       const response = await axios.get(`${API_URL}/users/${user._id}`);
       setUser(response.data);
@@ -134,6 +201,7 @@ export const AuthProvider = ({ children }) => {
       error,
       login,
       register,
+      loginAsSimulatedUser,
       logout,
       updatePreferences,
       refreshUser

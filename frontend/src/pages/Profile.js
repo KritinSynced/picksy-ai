@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { FaUser, FaHistory, FaHeart, FaShoppingBag, FaSlidersH, FaSignOutAlt, FaUnlockAlt, FaEnvelope, FaPen } from 'react-icons/fa';
+import { SignInButton, SignUpButton } from '@clerk/clerk-react';
 import { useAuth } from '../context/AuthContext';
 import ProductCard from '../components/ProductCard';
 import './Profile.css';
@@ -281,6 +282,25 @@ const Profile = () => {
                   {loading ? <div className="btn-spinner"></div> : 'Create Account'}
                 </button>
               </form>
+            )}
+
+            {process.env.REACT_APP_CLERK_PUBLISHABLE_KEY && (
+              <div className="clerk-auth-section" style={{ marginTop: '20px', borderTop: '1px solid var(--border-color)', paddingTop: '20px', textAlign: 'center' }}>
+                <span className="clerk-or-divider" style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>— Or Use Production Credentials —</span>
+                {isLoginTab ? (
+                  <SignInButton mode="modal">
+                    <button type="button" className="btn-premium" style={{ width: '100%', background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 100%)' }}>
+                      Sign In with Clerk
+                    </button>
+                  </SignInButton>
+                ) : (
+                  <SignUpButton mode="modal">
+                    <button type="button" className="btn-premium" style={{ width: '100%', background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 100%)' }}>
+                      Sign Up with Clerk
+                    </button>
+                  </SignUpButton>
+                )}
+              </div>
             )}
 
             <div className="auth-footer">
