@@ -101,7 +101,22 @@ const Search = () => {
             health: ['Optimum Nutrition', 'Centrum', 'Dettol', 'Colgate', 'Gillette', 'Oral-B', 'Omron', 'MuscleBlaze'],
             furniture: ['IKEA', 'Godrej Interio', 'Ashley Furniture', 'Home Centre', 'Pepperfry', 'Urban Ladder', 'La-Z-Boy']
           };
-          categoryBrands = categoryBrandsMap[selectedCategory] || [];
+          const subToParentMap = {
+            laptops: 'electronics', smartphones: 'electronics', headphones: 'electronics', smartwatches: 'electronics', televisions: 'electronics', cameras: 'electronics', tablets: 'electronics', accessories: 'electronics',
+            tshirts: 'fashion', shirts: 'fashion', jeans: 'fashion', jackets: 'fashion', dresses: 'fashion', activewear: 'fashion', footwear: 'fashion', watches: 'fashion',
+            skincare: 'beauty', haircare: 'beauty', makeup: 'beauty', fragrances: 'beauty', bath_body: 'beauty', mens_grooming: 'beauty',
+            cookware: 'home_kitchen', appliances: 'home_kitchen', home_decor: 'home_kitchen', bedding: 'home_kitchen', kitchen_tools: 'home_kitchen', dining: 'home_kitchen',
+            running: 'sports', fitness_gear: 'sports', team_sports: 'sports', outdoor_recreation: 'sports', racket_sports: 'sports', swimming: 'sports',
+            snacks: 'grocery', beverages: 'grocery', staples: 'grocery', dairy_eggs: 'grocery', breakfast: 'grocery', sauces_spreads: 'grocery',
+            fiction: 'books', non_fiction: 'books', biographies: 'books', sci_fi_fantasy: 'books', self_help: 'books', mystery_thriller: 'books',
+            car_care: 'automotive', parts: 'automotive', gps_electronics: 'automotive', tools: 'automotive',
+            board_games: 'toys', action_figures: 'toys', dolls: 'toys', educational: 'toys', puzzles: 'toys', building_sets: 'toys',
+            vitamins: 'health', personal_care: 'health', otc_medicine: 'health', wellness_devices: 'health', nutrition: 'health',
+            living_room: 'furniture', bedroom: 'furniture', office: 'furniture', dining_room: 'furniture', outdoor_furniture: 'furniture',
+            consoles: 'gaming', video_games: 'gaming', controllers: 'gaming', gaming_headsets: 'gaming', chair_desks: 'gaming'
+          };
+          const parentKey = subToParentMap[selectedCategory] || selectedCategory;
+          categoryBrands = categoryBrandsMap[parentKey] || [];
         } else {
           categoryBrands = ['Apple', 'Samsung', 'Sony', 'Nike', 'Adidas', 'IKEA', 'Philips', 'LEGO', 'Bosch'];
         }

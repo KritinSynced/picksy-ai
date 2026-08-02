@@ -18,9 +18,12 @@ router.get('/', async (req, res) => {
     
     let query = {};
 
-    // Filter by category
+    // Filter by category or subcategory
     if (category) {
-      query.category = category.toLowerCase();
+      query.$or = [
+        { category: category.toLowerCase() },
+        { subcategory: category.toLowerCase() }
+      ];
     }
 
     // Filter by brand
