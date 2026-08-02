@@ -10,6 +10,120 @@ import './Search.css';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
+const subToParentMap = {
+  laptops: 'electronics', smartphones: 'electronics', headphones: 'electronics', smartwatches: 'electronics', televisions: 'electronics', cameras: 'electronics', tablets: 'electronics', accessories: 'electronics',
+  tshirts: 'fashion', shirts: 'fashion', jeans: 'fashion', jackets: 'fashion', dresses: 'fashion', activewear: 'fashion', footwear: 'fashion', watches: 'fashion',
+  skincare: 'beauty', haircare: 'beauty', makeup: 'beauty', fragrances: 'beauty', bath_body: 'beauty', mens_grooming: 'beauty',
+  cookware: 'home_kitchen', appliances: 'home_kitchen', home_decor: 'home_kitchen', bedding: 'home_kitchen', kitchen_tools: 'home_kitchen', dining: 'home_kitchen',
+  running: 'sports', fitness_gear: 'sports', team_sports: 'sports', outdoor_recreation: 'sports', racket_sports: 'sports', swimming: 'sports',
+  snacks: 'grocery', beverages: 'grocery', staples: 'grocery', dairy_eggs: 'grocery', breakfast: 'grocery', sauces_spreads: 'grocery',
+  fiction: 'books', non_fiction: 'books', biographies: 'books', sci_fi_fantasy: 'books', self_help: 'books', mystery_thriller: 'books',
+  car_care: 'automotive', accessories: 'automotive', parts: 'automotive', gps_electronics: 'automotive', tools: 'automotive',
+  board_games: 'toys', action_figures: 'toys', dolls: 'toys', educational: 'toys', puzzles: 'toys', building_sets: 'toys',
+  vitamins: 'health', personal_care: 'health', otc_medicine: 'health', wellness_devices: 'health', nutrition: 'health',
+  living_room: 'furniture', bedroom: 'furniture', office: 'furniture', dining_room: 'furniture', outdoor_furniture: 'furniture',
+  consoles: 'gaming', video_games: 'gaming', controllers: 'gaming', gaming_headsets: 'gaming', chair_desks: 'gaming'
+};
+
+const subcategoriesMap = {
+  electronics: [
+    { name: 'Laptops', key: 'laptops' },
+    { name: 'Smartphones', key: 'smartphones' },
+    { name: 'Headphones', key: 'headphones' },
+    { name: 'Smartwatches', key: 'smartwatches' },
+    { name: 'Televisions', key: 'televisions' },
+    { name: 'Cameras', key: 'cameras' },
+    { name: 'Tablets', key: 'tablets' },
+    { name: 'Accessories', key: 'accessories' }
+  ],
+  fashion: [
+    { name: 'T-Shirts', key: 'tshirts' },
+    { name: 'Shirts', key: 'shirts' },
+    { name: 'Jeans', key: 'jeans' },
+    { name: 'Jackets', key: 'jackets' },
+    { name: 'Dresses', key: 'dresses' },
+    { name: 'Activewear', key: 'activewear' },
+    { name: 'Footwear', key: 'footwear' },
+    { name: 'Watches', key: 'watches' }
+  ],
+  beauty: [
+    { name: 'Skincare', key: 'skincare' },
+    { name: 'Haircare', key: 'haircare' },
+    { name: 'Makeup', key: 'makeup' },
+    { name: 'Fragrances', key: 'fragrances' },
+    { name: 'Bath & Body', key: 'bath_body' },
+    { name: 'Men\'s Grooming', key: 'mens_grooming' }
+  ],
+  home_kitchen: [
+    { name: 'Cookware', key: 'cookware' },
+    { name: 'Appliances', key: 'appliances' },
+    { name: 'Home Decor', key: 'home_decor' },
+    { name: 'Bedding', key: 'bedding' },
+    { name: 'Kitchen Tools', key: 'kitchen_tools' },
+    { name: 'Dining', key: 'dining' }
+  ],
+  sports: [
+    { name: 'Running', key: 'running' },
+    { name: 'Fitness Gear', key: 'fitness_gear' },
+    { name: 'Team Sports', key: 'team_sports' },
+    { name: 'Outdoor', key: 'outdoor_recreation' },
+    { name: 'Racket Sports', key: 'racket_sports' },
+    { name: 'Swimming', key: 'swimming' }
+  ],
+  grocery: [
+    { name: 'Snacks', key: 'snacks' },
+    { name: 'Beverages', key: 'beverages' },
+    { name: 'Staples', key: 'staples' },
+    { name: 'Dairy & Eggs', key: 'dairy_eggs' },
+    { name: 'Breakfast', key: 'breakfast' },
+    { name: 'Sauces & Spreads', key: 'sauces_spreads' }
+  ],
+  books: [
+    { name: 'Fiction', key: 'fiction' },
+    { name: 'Non-Fiction', key: 'non_fiction' },
+    { name: 'Biographies', key: 'biographies' },
+    { name: 'Sci-Fi & Fantasy', key: 'sci_fi_fantasy' },
+    { name: 'Self-Help', key: 'self_help' },
+    { name: 'Mystery & Thriller', key: 'mystery_thriller' }
+  ],
+  automotive: [
+    { name: 'Car Care', key: 'car_care' },
+    { name: 'Accessories', key: 'accessories' },
+    { name: 'Parts', key: 'parts' },
+    { name: 'GPS & Electronics', key: 'gps_electronics' },
+    { name: 'Tools', key: 'tools' }
+  ],
+  toys: [
+    { name: 'Board Games', key: 'board_games' },
+    { name: 'Action Figures', key: 'action_figures' },
+    { name: 'Dolls', key: 'dolls' },
+    { name: 'Educational', key: 'educational' },
+    { name: 'Puzzles', key: 'puzzles' },
+    { name: 'Building Sets', key: 'building_sets' }
+  ],
+  health: [
+    { name: 'Vitamins', key: 'vitamins' },
+    { name: 'Personal Care', key: 'personal_care' },
+    { name: 'OTC Medicine', key: 'otc_medicine' },
+    { name: 'Wellness Devices', key: 'wellness_devices' },
+    { name: 'Nutrition', key: 'nutrition' }
+  ],
+  furniture: [
+    { name: 'Living Room', key: 'living_room' },
+    { name: 'Bedroom', key: 'bedroom' },
+    { name: 'Office', key: 'office' },
+    { name: 'Dining Room', key: 'dining_room' },
+    { name: 'Outdoor Furniture', key: 'outdoor_furniture' }
+  ],
+  gaming: [
+    { name: 'Consoles', key: 'consoles' },
+    { name: 'Video Games', key: 'video_games' },
+    { name: 'Controllers', key: 'controllers' },
+    { name: 'Gaming Headsets', key: 'gaming_headsets' },
+    { name: 'Chairs & Desks', key: 'chair_desks' }
+  ]
+};
+
 const Search = () => {
   const navigate = useNavigate();
   const location = useLocation();
