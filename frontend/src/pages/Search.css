@@ -180,8 +180,8 @@
    ========================================== */
 .catalog-layout {
   display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 40px;
+  grid-template-columns: 240px 1fr;
+  gap: 30px;
   margin-top: 30px;
   align-items: start;
 }
@@ -191,15 +191,21 @@
 }
 
 .catalog-sidebar {
-  padding: 24px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
   background: var(--bg-surface-glass);
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-md);
   position: sticky;
   top: 110px;
+}
+
+/* Compact Products Grid for search catalog */
+.search-catalog-page .products-grid {
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 20px;
 }
 
 .sidebar-header {
