@@ -200,10 +200,8 @@ const Navbar = () => {
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="navbar-container">
-        {/* Brand Logo */}
         <Link to="/" className="navbar-logo">
           <span className="logo-text">Picksy</span>
-          <span className="logo-ai">AI</span>
         </Link>
 
         {/* Dynamic Category Navigation Menu */}
