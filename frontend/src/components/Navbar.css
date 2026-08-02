@@ -1,8 +1,8 @@
 .navbar {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: var(--bg-surface-glass);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 1px solid var(--border-glass);
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -10,9 +10,9 @@
 }
 
 .navbar.scrolled {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: var(--bg-surface-glass);
   box-shadow: var(--shadow-sm);
-  border-bottom-color: #f1f5f9;
+  border-bottom-color: var(--border-color);
 }
 
 .navbar-container {
@@ -129,19 +129,20 @@
   width: 100%;
   padding: 0.65rem 1.2rem;
   padding-right: 2.8rem;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
   font-family: var(--font-primary);
   font-size: 0.9rem;
-  background-color: #f8fafc;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   transition: var(--transition);
 }
 
 .search-bar input:focus {
   outline: none;
   border-color: var(--primary);
-  background-color: #ffffff;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+  background-color: var(--bg-surface);
+  box-shadow: 0 0 0 3px var(--primary-light);
 }
 
 .search-bar button {
@@ -208,7 +209,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #ffffff;
+  border: 2px solid var(--bg-surface);
   box-shadow: var(--shadow-sm);
 }
 
@@ -238,7 +239,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #ffffff;
+  border: 2px solid var(--bg-surface);
   box-shadow: var(--shadow-sm);
   transition: var(--transition);
 }
@@ -279,7 +280,7 @@
 
 .dropdown-divider {
   border: none;
-  border-top: 1px solid #f1f5f9;
+  border-top: 1px solid var(--border-color);
   margin: 0.5rem 0;
 }
 

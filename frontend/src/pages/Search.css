@@ -174,3 +174,255 @@
   background: var(--text-muted);
   border-radius: var(--radius-full);
 }
+
+/* ==========================================
+   Catalog Filters Sidebar Layout & Inputs
+   ========================================== */
+.catalog-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 40px;
+  margin-top: 30px;
+  align-items: start;
+}
+
+.mobile-filter-toggle-btn {
+  display: none;
+}
+
+.catalog-sidebar {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background: var(--bg-surface-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  position: sticky;
+  top: 110px;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebar-header h3 {
+  font-family: var(--font-title);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.close-filters-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.15rem;
+  cursor: pointer;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.filter-group h4 {
+  font-family: var(--font-title);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+/* Price Range Limit Slider */
+.price-slider-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.price-slider {
+  width: 100%;
+  accent-color: var(--primary);
+  height: 6px;
+  border-radius: 4px;
+  background: var(--border-color);
+  outline: none;
+  cursor: pointer;
+}
+
+.price-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.current-max-label {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* Brand Checkbox List */
+.brand-checklist {
+  max-height: 180px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-right: 4px;
+}
+
+/* Custom Styled Theme Checkboxes */
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+  font-weight: 500;
+}
+
+.checkbox-label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkbox-custom {
+  height: 18px;
+  width: 18px;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  transition: var(--transition);
+  position: relative;
+}
+
+.checkbox-label:hover input ~ .checkbox-custom {
+  border-color: var(--primary);
+  background-color: var(--primary-light);
+}
+
+.checkbox-label input:checked ~ .checkbox-custom {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.checkbox-custom::after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 6px;
+  top: 2px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2.5px 2.5px 0;
+  transform: rotate(45deg);
+}
+
+.checkbox-label input:checked ~ .checkbox-custom::after {
+  display: block;
+}
+
+/* Dropdown Select option fields */
+.filter-select {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  font-family: var(--font-primary);
+  font-size: 0.9rem;
+  outline: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.filter-select:focus {
+  border-color: var(--primary);
+}
+
+.reset-filters-btn {
+  margin-top: 10px;
+  width: 100%;
+}
+
+/* No Results placeholder styles */
+.no-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 80px 40px;
+  gap: 16px;
+  border-radius: var(--radius-md);
+  margin-top: 20px;
+  width: 100%;
+}
+
+.no-results p {
+  color: var(--text-secondary);
+  max-width: 450px;
+  margin-bottom: 8px;
+}
+
+.no-results-icon {
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+/* Responsive sidebars */
+@media (max-width: 1024px) {
+  .catalog-layout {
+    grid-template-columns: 240px 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .catalog-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .mobile-filter-toggle-btn {
+    display: inline-flex;
+    margin-bottom: 12px;
+  }
+  
+  .catalog-sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 320px;
+    height: 100vh;
+    z-index: 1500;
+    background: var(--bg-surface);
+    border-radius: 0;
+    border: none;
+    border-right: 1px solid var(--border-color);
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+  }
+  
+  .catalog-sidebar.mobile-visible {
+    left: 0;
+  }
+  
+  .close-filters-btn {
+    display: flex;
+  }
+}
