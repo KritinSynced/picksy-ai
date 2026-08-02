@@ -130,6 +130,16 @@ const Home = () => {
     <div className="home-page animate-fade-in">
       {/* Modern Mesh Hero Banner */}
       <div className="hero-banner-premium">
+        <video 
+          className="hero-video-bg" 
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+        >
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-network-connection-lines-and-dots-loop-40439-large.mp4" type="video/mp4" />
+        </video>
+        <div className="hero-video-overlay"></div>
         <div className="hero-glow-1"></div>
         <div className="hero-glow-2"></div>
         <div className="container hero-container">
