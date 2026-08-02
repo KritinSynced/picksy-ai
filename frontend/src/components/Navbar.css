@@ -96,7 +96,9 @@
   left: 0;
   min-width: 200px;
   padding: 0.75rem 0;
-  margin-top: 0.5rem;
+  margin-top: 0;
+  border-top: 8px solid transparent;
+  background-clip: padding-box;
   border-radius: var(--radius-sm);
   z-index: 10;
 }
