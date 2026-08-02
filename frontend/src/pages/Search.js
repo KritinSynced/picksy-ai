@@ -189,6 +189,8 @@ const Search = () => {
     { name: 'Gaming Consoles', key: 'gaming' }
   ];
 
+  const activeParentCategory = subToParentMap[selectedCategory] || selectedCategory;
+
   return (
     <div className="container search-catalog-page animate-fade-in" style={{ marginTop: '110px' }}>
       
@@ -246,15 +248,34 @@ const Search = () => {
               >
                 All Categories
               </button>
-              {allCategories.map(cat => (
-                <button
-                  key={cat.key}
-                  className={`cat-link-btn ${selectedCategory === cat.key ? 'active' : ''}`}
-                  onClick={() => handleCategoryReset(cat.key)}
-                >
-                  {cat.name}
-                </button>
-              ))}
+              {allCategories.map(cat => {
+                const isParentActive = activeParentCategory === cat.key;
+                return (
+                  <div key={cat.key} className="category-group-item" style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+                    <button
+                      className={`cat-link-btn ${selectedCategory === cat.key ? 'active' : ''}`}
+                      onClick={() => handleCategoryReset(cat.key)}
+                      style={{ width: '100%' }}
+                    >
+                      {cat.name}
+                    </button>
+                    {isParentActive && subcategoriesMap[cat.key] && (
+                      <div className="subcategory-links-list" style={{ paddingLeft: '14px', margin: '4px 0 8px 0', display: 'flex', flexDirection: 'column', gap: '4px', borderLeft: '1px solid var(--border-color)' }}>
+                        {subcategoriesMap[cat.key].map(sub => (
+                          <button
+                            key={sub.key}
+                            className={`cat-link-btn ${selectedCategory === sub.key ? 'active' : ''}`}
+                            style={{ fontSize: '0.82rem', padding: '6px 10px', width: '100%', opacity: selectedCategory === sub.key ? 1 : 0.85 }}
+                            onClick={() => handleCategoryReset(sub.key)}
+                          >
+                            • {sub.name}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
 
